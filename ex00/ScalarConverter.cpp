@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:01:43 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/13 13:51:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:38:19 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ void  convertToChar(std::string literal)
 void  convertToInt(std::string literal)
 {
 	int	checkPoint = 0;
-	if (literal.length() == 1 && isdigit(literal[0]) == 0)
+	if (literal.length() == 1 && isdigit(literal[0] + 48) == 0)
 	{
+		// printf("herrrre\n");
 		std::cout << "int: " << literal[0] << std::endl;
 		return ;
 	}
@@ -85,12 +86,12 @@ void  convertToInt(std::string literal)
 	{
 		if (literal[i] == '.')
 			checkPoint++;
-		if (i == literal.length() - 1 && isdigit(literal[i]) == 0 && literal[i] != 'f')
+		if (i == literal.length() - 1 && isdigit(literal[i] + 48) == 0 && literal[i] != 'f')
 		{
 			std::cout << "int: impossible" << std::endl;
 			return ;
 		}
-		if ((isdigit(literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
+		if ((isdigit(literal[i] + 48) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
 		{
 			std::cout << "int: impossible" << std::endl;
 			return ;
@@ -100,10 +101,8 @@ void  convertToInt(std::string literal)
 	for (size_t i=0; i<literal.length(); i++)
 	{
 		if (i==0 && literal[i] == '0')
-		{
-			std::cout << literal[i];
-			while(literal[i++] == '0');
-		}
+			while(literal[++i] == '0');
+	
 		if (literal[i] == '.')
 			break;
 		std::cout << literal[i];
@@ -114,7 +113,7 @@ void  convertToInt(std::string literal)
 void  convertToFloat(std::string literal)
 {
 	int	checkPoint = 0;
-	if (literal.length() == 1 && isdigit(literal[0]) == 0)
+	if (literal.length() == 1 && isdigit(literal[0] + 48) == 0)
 	{
 		std::cout << "float: " << literal[0] << ".0f" << std::endl;;
 		return ;
@@ -123,12 +122,12 @@ void  convertToFloat(std::string literal)
 	{
 		if (literal[i] == '.')
 			checkPoint++;
-		if (i == literal.length() - 1 && isdigit(literal[i]) == 0 && literal[i] != 'f')
+		if (i == literal.length() - 1 && isdigit(literal[i] + 48) == 0 && literal[i] != 'f')
 		{
 			std::cout << "float: nanf" << std::endl;
 			return ;
 		}
-		if ((isdigit(literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
+		if ((isdigit(literal[i] + 48) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
 		{
 			std::cout << "float: nanf" << std::endl;
 			return;
@@ -138,21 +137,19 @@ void  convertToFloat(std::string literal)
 	for (size_t i=0; i<literal.length(); i++)
 	{
 		if (i==0 && literal[i] == '0')
-		{
-			std::cout << literal[i];
-			while(literal[i++] == '0');
-		}
-		if (literal[i] == '.')
-			break;
+			while(literal[++i] == '0');
 		std::cout << literal[i];
 	}
-	std::cout << ".0f" << std::endl;
+	if (literal[literal.length() - 1] != 'f')
+		std::cout << "f" << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 void  convertToDouble(std::string literal)
 {
 	int	checkPoint = 0;
-	if (literal.length() == 1 && isdigit(literal[0]) == 0)
+	if (literal.length() == 1 && isdigit(literal[0] + 48) == 0)
 	{
 		std::cout << "double: " << literal[0] << ".0" << std::endl;
 		return ;
@@ -161,12 +158,12 @@ void  convertToDouble(std::string literal)
 	{
 		if (literal[i] == '.')
 			checkPoint++;
-		if (i == literal.length() - 1 && isdigit(literal[i]) == 0 && literal[i] != 'f')
+		if (i == literal.length() - 1 && isdigit(literal[i] + 48) == 0 && literal[i] != 'f')
 		{
 			std::cout << "double: nan" << std::endl;
 			return ;
 		}
-		if ((isdigit(literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
+		if ((isdigit(literal[i] + 48) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
 		{
 			std::cout << "double: nan" << std::endl;
 			return;
@@ -176,15 +173,12 @@ void  convertToDouble(std::string literal)
 	for (size_t i=0; i<literal.length(); i++)
 	{
 		if (i==0 && literal[i] == '0')
-		{
-			std::cout << literal[i];
-			while(literal[i++] == '0');
-		}
-		if (literal[i] == 'f' || literal[i] == '.')
+			while(literal[++i] == '0');
+		if (literal[i] == 'f')
 			break;
 		std::cout << literal[i];
 	}
-	std::cout << ".0" << std::endl;
+	std::cout << std::endl;
 }
 
 void ScalarConverter::convert(std::string literal)

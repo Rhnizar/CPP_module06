@@ -6,13 +6,13 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:53:57 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/13 13:04:40 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:15:53 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdio.h"
 int main()
 {
-	printf("%c\n", 0);
+	printf("%c\n", 1111);
 	return 0;
 }
