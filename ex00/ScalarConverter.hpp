@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:23:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/14 20:25:48 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/15 00:46:27 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
-#include <limits>
+#include <climits>
 #include <iomanip>
+#include <cstdlib> // Include the C Standard Library header
 
 class ScalarConverter
 {

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:01:43 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/14 19:10:02 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/15 00:47:23 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void  convertToChar(std::string literal)
 {
 	size_t i;
 	int	checkPoint = 0;
-	double res = std::strtod(literal.c_str(), NULL);
+	double res = strtod(literal.c_str(), NULL);
 	for(size_t i=0; i< literal.length(); i++)
 	{
 		if (literal[i] == '.')
@@ -96,7 +96,7 @@ void  convertToInt(std::string literal)
 {
 	int	checkPoint = 0;
 	size_t check_zero = 0;
-	double res = std::strtod(literal.c_str(), NULL);
+	double res = strtod(literal.c_str(), NULL);
 	if (res > INT_MAX || res < INT_MIN)
 	{
 		std::cout << "int: impossible"  << std::endl;
@@ -148,7 +148,7 @@ void  convertToFloat(std::string literal)
 	std::cout << std::fixed << std::setprecision((literal.find('.')) - 1);
 	int	checkPoint = 0;
 	size_t check_zero = 0;
-	double res = std::strtod(literal.c_str(), NULL);
+	double res = strtod(literal.c_str(), NULL);
 	if (literal == "inf" || literal == "+inf" || literal == "-inf")
 	{
 		std::cout << "float: " << (double)res << "f" << std::endl;
@@ -201,7 +201,7 @@ void  convertToDouble(std::string literal)
 	
 	int	checkPoint = 0;
 	size_t check_zero = 0;
-	double res = std::strtod(literal.c_str(), NULL);
+	double res = strtod(literal.c_str(), NULL);
 	
 	if (literal == "inf" || literal == "+inf" || literal == "-inf")
 	{
