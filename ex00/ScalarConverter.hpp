@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:23:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/14 13:09:15 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:25:48 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ class ScalarConverter
     ScalarConverter(const ScalarConverter& otherScalarConverter);//copy constractor
     ScalarConverter& operator=(const ScalarConverter& otherScalarConverter);//copy assignement operator
     ~ScalarConverter();//destractor
-    void convert(std::string literal); 
+    void convert(std::string literal);
 };
 
-int	ft_atoi(const char *str);
 
 void  convertToChar(std::string literal);
 void  convertToInt(std::string literal);
