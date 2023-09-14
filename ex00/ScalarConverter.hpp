@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:23:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/13 13:16:47 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:09:15 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <limits>
+#include <iomanip>
 
 class ScalarConverter
 {
