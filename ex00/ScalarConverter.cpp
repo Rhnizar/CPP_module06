@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:01:43 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/15 00:47:23 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:35:32 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,35 @@ ScalarConverter::~ScalarConverter()
 
 void  convertToChar(std::string literal)
 {
-	size_t i;
+	size_t i = 0;
 	int	checkPoint = 0;
 	double res = strtod(literal.c_str(), NULL);
-	for(size_t i=0; i< literal.length(); i++)
+
+	if(literal[i] == '+' || literal[i] == '-')
+		i++;
+	while (i < literal.length())
 	{
 		if (literal[i] == '.')
+		{
+			if (literal[i + 1] == 'f')
+			{
+				std::cout << "char : impossible" << std::endl;
+				return ;
+			}
 			checkPoint++;
-		// if (isdigit((int)literal[i]) == 0 && literal.length() > 1)
-		// {
-		// 	std::cout << "char: impossible" << std::endl;
-		// 		return ;
-		// }
+		}
+		if ((i == literal.length() - 1 && isdigit((int)literal[i]) == 0 && literal[i] != 'f' && literal.length() > 1) \
+				 || (literal[i] == 'f' && checkPoint == 0))
+		{
+			std::cout << "char : impossible" << std::endl;
+			return ;
+		}
+		if ((isdigit((int)literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
+		{
+			std::cout << "char: impossible" << std::endl;
+			return ;
+		}
+		i++;
 	}
 	if (checkPoint > 1)
 	{
@@ -76,16 +93,16 @@ void  convertToChar(std::string literal)
 			}
 		}
 	}
-	if (isdigit((int)literal[0]) && res >= 0 && res <= 31)
+	if (isdigit((int)literal[0]) && (res <= 31 || res > 126))
 	{
 		std::cout << "char: Non displayable" << std::endl;
 		return;
 	}
-	if (literal.length() > 1 && isdigit(literal[0]) == 0)
+	if (literal.length() > 1 && isdigit(literal[0]) == 0 && literal[0] != '+' && literal[0] != '-')
 		std::cout << "char: impossible" << std::endl;
 	else
 	{
-		if(isdigit((int)literal[0]) == 0)
+		if(isdigit((int)literal[0]) == 0 && literal.length() >= 1 && literal[0] != '+' && literal[0] != '-')
 			std::cout << "char: " << "'" << literal[0] << "'" << std::endl;
 		else
 			std::cout << "char: " << "'" << (char)res << "'" << std::endl;
@@ -94,9 +111,12 @@ void  convertToChar(std::string literal)
 
 void  convertToInt(std::string literal)
 {
+	size_t i = 0;
 	int	checkPoint = 0;
-	size_t check_zero = 0;
 	double res = strtod(literal.c_str(), NULL);
+
+	if(literal[i] == '+' || literal[i] == '-')
+		i++;
 	if (res > INT_MAX || res < INT_MIN)
 	{
 		std::cout << "int: impossible"  << std::endl;
@@ -107,7 +127,7 @@ void  convertToInt(std::string literal)
 		std::cout << "int: " << (int)literal[0] << std::endl;
 		return ;
 	}
-	for (size_t i=0; i<literal.length(); i++)
+	while (i < literal.length())
 	{
 		if (literal[i] == '.')
 		{
@@ -129,38 +149,36 @@ void  convertToInt(std::string literal)
 			std::cout << "int: impossible" << std::endl;
 			return ;
 		}
-		
+		i++;
 	}
 	std::cout << "int: ";
-	size_t i=0;
-	if (i==0 && literal[i] == '0')
-	{
-		while(literal[i++] == '0')
-			check_zero++;
-		if (check_zero != 0 && literal.length() == check_zero && res != 0)
-			std::cout << '0' ;
-	}
 	std::cout << (int)res << std::endl;
 }
 
 void  convertToFloat(std::string literal)
 {
-	std::cout << std::fixed << std::setprecision((literal.find('.')) - 1);
+	size_t i = 0;
 	int	checkPoint = 0;
-	size_t check_zero = 0;
 	double res = strtod(literal.c_str(), NULL);
-	if (literal == "inf" || literal == "+inf" || literal == "-inf")
+
+	if(literal[i] == '+' || literal[i] == '-')
+		i++;
+	if (res == 0)
+		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 1);
+	else
+		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 2);
+	if (literal == "inf" || literal == "+inf" || literal == "-inf" || literal == "nan" || literal == "nanf")
 	{
-		std::cout << "float: " << (double)res << "f" << std::endl;
+		std::cout << "float: " << (float)res << "f" << std::endl;
 		return ;
 	}
-
 	if (literal.length() == 1 && isdigit((int)literal[0]) == 0)
 	{
 		std::cout << "float: " << (int)literal[0] << ".0f" << std::endl;
 		return ;
 	}
-	for (size_t i=0; i<literal.length(); i++)
+	
+	while (i <literal.length())
 	{
 		if (literal[i] == '.')
 		{
@@ -171,41 +189,39 @@ void  convertToFloat(std::string literal)
 			}
 			checkPoint++;
 		}
-		
-		if(isdigit((int)literal[i]) == 0 && literal[i] != '.' && literal.length() > 1 && literal[literal.length() - 1] != 'f')
+		if ((i == literal.length() - 1 && isdigit((int)literal[i]) == 0 && literal[i] != 'f') \
+			 || (literal[i] == 'f' && checkPoint == 0))
 		{
-			std::cout << "float: nanf" << std::endl;
+			std::cout << "float: impossible" << std::endl;
 			return ;
 		}
-		if ((isdigit((int)literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
+		if ((isdigit((int)literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.' && literal[i] != '\0') || checkPoint > 1)
 		{
 			std::cout << "float: impossible" << std::endl;
 			return;
 		}
+		i++;
 	}
 	std::cout << "float: ";
-	size_t i=0;
-	if (i==0 && literal[i] == '0')
-	{
-		while(literal[i++] == '0')
-			check_zero++;
-		if (check_zero != 0 && literal.length() == check_zero && res != 0)
-			std::cout << '0';
-	}
 	std::cout << (float)res << "f" << std::endl;
 }
 
 void  convertToDouble(std::string literal)
 {
-	std::cout << std::fixed << std::setprecision((literal.find('.')) - 1);
-	
+	size_t i=0;
 	int	checkPoint = 0;
-	size_t check_zero = 0;
 	double res = strtod(literal.c_str(), NULL);
+
+	if(literal[i] == '+' || literal[i] == '-')
+		i++;
+	if (res == 0)
+		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 1);
+	else
+		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 2);
 	
-	if (literal == "inf" || literal == "+inf" || literal == "-inf")
+	if (literal == "inf" || literal == "+inf" || literal == "-inf" || literal == "nan" || literal == "nanf")
 	{
-		std::cout << "double: " << (double)res  << std::endl;
+		std::cout << "double: " << (double)res << std::endl;
 		return ;
 	}
 	if (literal.length() == 1 && isdigit((int)literal[0]) == 0)
@@ -213,7 +229,7 @@ void  convertToDouble(std::string literal)
 		std::cout << "double: " << (int)literal[0] << ".0" << std::endl;
 		return ;
 	}
-	for (size_t i=0; i<literal.length(); i++)
+	while (i <literal.length())
 	{
 		if (literal[i] == '.')
 		{
@@ -224,26 +240,20 @@ void  convertToDouble(std::string literal)
 			}
 			checkPoint++;
 		}
-		if(isdigit((int)literal[i]) == 0 && literal[i] != '.' && literal.length() > 1 && literal[literal.length() - 1] != 'f')
+		if ((i == literal.length() - 1 && isdigit((int)literal[i]) == 0 && literal[i] != 'f') \
+			 || (literal[i] == 'f' && checkPoint == 0))
 		{
-			std::cout << "double: nan" << std::endl;
+			std::cout << "double: impossible" << std::endl;
 			return ;
 		}
-		if ((isdigit((int)literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.') || checkPoint > 1)
+		if ((isdigit((int)literal[i]) == 0 && i != literal.length() - 1 && literal[i] != '.' && literal[i] != '\0') || checkPoint > 1)
 		{
 			std::cout << "double: impossible" << std::endl;
 			return;
 		}
+		i++;
 	}
 	std::cout << "double: ";
-	size_t i=0;
-	if (i==0 && literal[i] == '0')
-	{
-		while(literal[i++] == '0')
-			check_zero++;
-		if (check_zero != 0 && literal.length() == check_zero && res != 0)
-			std::cout << '0' ;
-	}
 	std::cout << (double)res << std::endl;
 }
 

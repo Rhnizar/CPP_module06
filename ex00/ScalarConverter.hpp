@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:23:33 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/15 00:46:27 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:37:46 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class ScalarConverter
     ScalarConverter(const ScalarConverter& otherScalarConverter);//copy constractor
     ScalarConverter& operator=(const ScalarConverter& otherScalarConverter);//copy assignement operator
     ~ScalarConverter();//destractor
-    void convert(std::string literal);
+    static void convert(std::string literal);
 };
 
 
