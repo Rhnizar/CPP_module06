@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:01:43 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/16 12:35:32 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:19:09 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,30 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& otherScalarCo
 ScalarConverter::~ScalarConverter()
 {}
 
+
+int	checkDot(std::string str)
+{
+	int i = 0;
+	while(str[i])
+	{
+		if (str[i] == '.')
+			return 1;
+		i++;
+	}
+	return 0;
+}
+
+int	checkF(std::string str)
+{
+	int i = 0;
+	while(str[i])
+	{
+		if (str[i] == 'f')
+			return 1;
+		i++;
+	}
+	return 0;
+}
 
 /*function to implement */
 
@@ -93,7 +117,7 @@ void  convertToChar(std::string literal)
 			}
 		}
 	}
-	if (isdigit((int)literal[0]) && (res <= 31 || res > 126))
+	if ((isdigit((int)literal[0]) && (res <= 31 || res > 126)) || literal[0] == '-')
 	{
 		std::cout << "char: Non displayable" << std::endl;
 		return;
@@ -163,10 +187,15 @@ void  convertToFloat(std::string literal)
 
 	if(literal[i] == '+' || literal[i] == '-')
 		i++;
-	if (res == 0)
-		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 1);
+	if (checkDot(literal))
+	{
+		if (checkF(literal))
+			std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 2);
+		else
+			std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 1);
+	}
 	else
-		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 2);
+		std::cout << std::fixed << std::setprecision(1);
 	if (literal == "inf" || literal == "+inf" || literal == "-inf" || literal == "nan" || literal == "nanf")
 	{
 		std::cout << "float: " << (float)res << "f" << std::endl;
@@ -203,7 +232,7 @@ void  convertToFloat(std::string literal)
 		i++;
 	}
 	std::cout << "float: ";
-	std::cout << (float)res << "f" << std::endl;
+	std::cout << (double)res << "f" << std::endl;
 }
 
 void  convertToDouble(std::string literal)
@@ -214,10 +243,15 @@ void  convertToDouble(std::string literal)
 
 	if(literal[i] == '+' || literal[i] == '-')
 		i++;
-	if (res == 0)
-		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 1);
+	if (checkDot(literal))
+	{
+		if (checkF(literal))
+			std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 2);
+		else
+			std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 1);
+	}
 	else
-		std::cout << std::fixed << std::setprecision(literal.length() - (literal.find('.')) - 2);
+		std::cout << std::fixed << std::setprecision(1);
 	
 	if (literal == "inf" || literal == "+inf" || literal == "-inf" || literal == "nan" || literal == "nanf")
 	{

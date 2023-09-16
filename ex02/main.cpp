@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 23:42:11 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/15 00:40:23 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:40:40 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 int main()
 {
-	Base b;
-	Base* ba = b.generate();
-	b.identify(*ba);
-	b.identify(ba);
+	Base* ba = generate();
+	identify(ba);
+	identify(*ba);
+	delete ba;
 	return 0;
 }

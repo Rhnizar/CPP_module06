@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 23:33:34 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/15 00:33:34 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:23:13 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ class A : public Base
 {
 	public:
 		~A();
-		// Base* generate(void);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 23:37:07 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/15 00:33:46 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:23:13 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,3 @@ A::~A()
 {
 	std::cout << "A: destractor called " << std::endl;
 }
-
-// Base* A::generate(void)
-// {
-// 	return (new A());
-// }

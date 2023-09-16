@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 23:30:07 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/15 00:33:26 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:15:15 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ class Base
 {
 	public:
 		virtual ~Base();
-		Base* generate(void);
-		void identify(Base* p);
-		void identify(Base& p);
 };
+
+Base* generate(void);
+void identify(Base* p);
+void identify(Base& p);
 
 
 #endif

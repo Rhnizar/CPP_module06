@@ -6,7 +6,7 @@
 /*   By: rrhnizar <rrhnizar@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 20:11:02 by rrhnizar          #+#    #+#             */
-/*   Updated: 2023/09/14 23:38:18 by rrhnizar         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:54:07 by rrhnizar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 struct Data
 {
 	int value;
-
-	Data(int val){value = val;}
 };
 
 class Serializer
